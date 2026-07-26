@@ -28,7 +28,10 @@
   --revonsuo:#3f7a52;
 }
 html{scroll-behavior:smooth}
-body{font-family:"Jost",sans-serif;background:var(--bg);color:var(--white);font-size:16px;line-height:1.6;overflow-x:hidden;cursor:none}
+body{font-family:"Jost",sans-serif;background:var(--bg);color:var(--white);font-size:16px;line-height:1.6;overflow-x:hidden}
+@media(pointer:fine){ body{cursor:none} }
+@media(pointer:coarse){ .cursor,.cursor-ring{display:none!important} }
+@media(prefers-reduced-motion: reduce){ body{cursor:auto!important} html{scroll-behavior:auto} }
 a{color:inherit}
 em{font-style:italic;color:var(--violet)}
 
@@ -205,13 +208,16 @@ section+section{border-top:1px solid var(--line)}
 .fade-up.visible{opacity:1;transform:translateY(0)}
 
 @media(max-width:900px){
+  nav{padding:1rem 1.5rem}
+  section{padding:4rem 1.5rem}
+  #hero{padding:0 1.5rem 4rem}
   #overview{grid-template-columns:1fr}
-  .overview-cell{border-right:none;border-bottom:1px solid var(--line)}
+  .overview-cell{border-right:none;border-bottom:1px solid var(--line);padding:2rem 1.5rem}
   .hero-content-left{max-width:100%}
-  .theory-grid{grid-template-columns:1fr 1fr}
+  .theory-grid{grid-template-columns:1fr}
   .concept-row{grid-template-columns:1fr;gap:0.5rem}
   .interview-grid,.ut-grid,.ut-quotes,.ut-iter-list{grid-template-columns:1fr}
-  #next{flex-direction:column;gap:1.5rem;text-align:center}
+  #next{flex-direction:column;gap:1.5rem;text-align:center;padding:2.5rem 1.5rem}
   .next-project{text-align:center}
 }
 </style>
@@ -585,14 +591,21 @@ section+section{border-top:1px solid var(--line)}
 <script>
 const cursor = document.querySelector('.cursor');
 const ring = document.querySelector('.cursor-ring');
-document.addEventListener('mousemove', e => {
-  cursor.style.left = e.clientX + 'px';
-  cursor.style.top = e.clientY + 'px';
-  ring.style.left = e.clientX + 'px';
-  ring.style.top = e.clientY + 'px';
-});
-document.addEventListener('mousedown', () => ring.style.transform = 'translate(-50%,-50%) scale(0.75)');
-document.addEventListener('mouseup', () => ring.style.transform = 'translate(-50%,-50%) scale(1)');
+const fine = window.matchMedia('(pointer:fine)').matches;
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(fine && !reduceMotion){
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+    ring.style.left = e.clientX + 'px';
+    ring.style.top = e.clientY + 'px';
+  });
+  document.addEventListener('mousedown', () => ring.style.transform = 'translate(-50%,-50%) scale(0.75)');
+  document.addEventListener('mouseup', () => ring.style.transform = 'translate(-50%,-50%) scale(1)');
+}else{
+  cursor.style.display = 'none';
+  ring.style.display = 'none';
+}
 
 const scrollLine = document.getElementById('scrollLine');
 window.addEventListener('scroll', () => {

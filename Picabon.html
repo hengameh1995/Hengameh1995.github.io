@@ -1,4 +1,8 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hengameh Koliyaei — Picabon</title>
 <style>
 @font-face{
@@ -25,6 +29,7 @@
 html{scroll-behavior:smooth}
 body{font-family:"Jost",sans-serif;background:var(--bg);color:var(--white);font-size:16px;line-height:1.6;overflow-x:hidden}
 @media(pointer:fine){ body{cursor:none} }
+@media(pointer:coarse){ .cursor,.cursor-ring{display:none!important} }
 @media(prefers-reduced-motion: reduce){ body{cursor:auto !important} html{scroll-behavior:auto} }
 
 .cursor{position:fixed;width:10px;height:10px;background:var(--rose);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
@@ -135,7 +140,7 @@ section{background:transparent}
 .pipeline-header{padding:5rem 3rem 3rem;display:flex;justify-content:space-between;align-items:flex-end;gap:4rem}
 .pipeline-note{font-size:0.85rem;color:var(--mid);max-width:320px;line-height:1.7}
 .pipeline-diagram{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#fff;padding:3.5rem 3rem;display:flex;flex-direction:column;align-items:center;gap:0.25rem}
-.diagram-feeds{display:flex;gap:1px;background:var(--line)}
+.diagram-feeds{display:flex;flex-wrap:wrap;justify-content:center;gap:1px;background:var(--line)}
 .feed-node{background:var(--rose-dim);color:var(--rose);font-size:0.72rem;letter-spacing:0.04em;text-transform:uppercase;padding:0.85rem 1.4rem;white-space:nowrap}
 .diagram-connector{display:flex;flex-direction:column;align-items:center;color:var(--mid);margin:0.35rem 0}
 .diagram-connector::before{content:"";width:1px;height:22px;background:var(--line)}
@@ -264,6 +269,8 @@ footer.credits{padding:2rem 3rem;display:flex;justify-content:space-between;flex
   footer.credits{padding:1.5rem}
 }
 </style>
+</head>
+<body>
 
 <div class="cursor" id="cursorDot"></div>
 <div class="cursor-ring" id="cursorRing"></div>
@@ -727,3 +734,5 @@ Create a short, exciting, and positive 4-6 sentence story for the child.
   }
 })();
 </script>
+</body>
+</html>

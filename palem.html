@@ -17,7 +17,10 @@
   --green-mid:rgba(76,137,105,0.7);
 }
 html{scroll-behavior:smooth}
-body{font-family:"Jost",sans-serif;background:var(--bg);color:var(--white);font-size:16px;line-height:1.6;overflow-x:hidden;cursor:none}
+body{font-family:"Jost",sans-serif;background:var(--bg);color:var(--white);font-size:16px;line-height:1.6;overflow-x:hidden}
+@media(pointer:fine){ body{cursor:none} }
+@media(pointer:coarse){ .cursor,.cursor-ring{display:none!important} }
+@media(prefers-reduced-motion: reduce){ body{cursor:auto!important} html{scroll-behavior:auto} }
 
 .cursor{position:fixed;width:10px;height:10px;background:var(--green);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:normal}
 .cursor-ring{position:fixed;width:36px;height:36px;border:1px solid var(--green);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all 0.16s ease;opacity:0.7}
@@ -215,11 +218,13 @@ nav.scrolled{background:rgba(255,255,255,0.15);backdrop-filter:blur(16px);border
 @media(max-width:900px){
   nav{padding:1rem 1.5rem}
   #hero{padding:0 1.5rem 4rem}
-  #overview{grid-template-columns:1fr}
+  .hero-content-left{max-width:100%}
+  #canvas-wrap{left:0;width:auto;height:55vh}
+  #overview{grid-template-columns:1fr;padding-right:0}
   .overview-cell{border-right:none;border-bottom:1px solid var(--line);padding:2rem 1.5rem}
   .concept-grid,.app-layout-new,#next{grid-template-columns:1fr}
   .app-preview iframe{width:100%;height:600px}
-  #concept,#brand,#app,#research{padding:4rem 1.5rem}
+  #concept,#brand,#app,#research,#type-color{padding:4rem 1.5rem}
   .video-header,.arch-header,.research-header,.type-header{flex-direction:column;gap:1.5rem;padding:3rem 1.5rem 2rem}
   .merch-grid,.poster-grid,.poster-grid--3,.type-showcase{grid-template-columns:1fr}
   .insights-grid{grid-template-columns:1fr}
@@ -255,6 +260,12 @@ nav.scrolled{background:rgba(255,255,255,0.15);backdrop-filter:blur(16px);border
 .swatch:hover{transform:translateY(-4px)}
 .swatch-name{font-size:0.62rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:0.25rem}
 .swatch-hex{font-size:0.7rem;font-weight:600;letter-spacing:0.04em;color:rgba(255,255,255,0.9);font-family:monospace}
+
+@media(max-width:900px){
+  .font-showcase{padding:1.5rem}
+  .font-display{font-size:clamp(1.5rem,7vw,7rem)}
+  .palette-row{grid-template-columns:repeat(4,1fr)}
+}
 </style>
 <script type="importmap">
 {
@@ -760,14 +771,21 @@ nav.scrolled{background:rgba(255,255,255,0.15);backdrop-filter:blur(16px);border
 // Custom cursor
 const cursor = document.querySelector('.cursor');
 const ring = document.querySelector('.cursor-ring');
-document.addEventListener('mousemove', e => {
-  cursor.style.left = e.clientX + 'px';
-  cursor.style.top = e.clientY + 'px';
-  ring.style.left = e.clientX + 'px';
-  ring.style.top = e.clientY + 'px';
-});
-document.addEventListener('mousedown', () => ring.style.transform = 'translate(-50%,-50%) scale(0.75)');
-document.addEventListener('mouseup', () => ring.style.transform = 'translate(-50%,-50%) scale(1)');
+const fine = window.matchMedia('(pointer:fine)').matches;
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(fine && !reduceMotion){
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+    ring.style.left = e.clientX + 'px';
+    ring.style.top = e.clientY + 'px';
+  });
+  document.addEventListener('mousedown', () => ring.style.transform = 'translate(-50%,-50%) scale(0.75)');
+  document.addEventListener('mouseup', () => ring.style.transform = 'translate(-50%,-50%) scale(1)');
+}else{
+  cursor.style.display = 'none';
+  ring.style.display = 'none';
+}
 
 // Scroll line
 const scrollLine = document.getElementById('scrollLine');
