@@ -1,0 +1,1631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Iwave — Hengameh Koliyaei</title>
+<link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --green: #2c51da;
+    --green-dim: rgba(44,81,218,0.15);
+    --green-mid: rgba(44,81,218,0.7);
+    --off: #eeeeee;
+    --cream: #000000;
+    --mid: #666;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--off);
+    color: var(--cream);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+
+
+  .wrap { position: relative; z-index: 1; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.4rem 3.5rem;
+    border-bottom: 0.5px solid rgba(0,0,0,0.1);
+    backdrop-filter: blur(12px);
+    background: rgba(255,255,255,0.15);
+  }
+  .nav-name {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300; font-size: 0.85rem; letter-spacing: 0.22em;
+    color: var(--cream); text-transform: uppercase; text-decoration: none;
+  }
+  .nav-tag {
+    font-size: 0.65rem; letter-spacing: 0.22em;
+    color: var(--green-mid); text-transform: uppercase; font-weight: 300;
+  }
+
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 3.5rem 5rem;
+    position: relative;
+  }
+  .hero-eyebrow {
+    font-size: 0.62rem; letter-spacing: 0.3em;
+    color: var(--green-mid); text-transform: uppercase;
+    margin-bottom: 1.2rem; font-weight: 400;
+  }
+  .hero-title {
+    font-family: 'Jost', sans-serif;
+    font-size: clamp(5rem, 14vw, 13rem);
+    font-weight: 800; line-height: 0.88;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--cream);
+    margin-bottom: 0.4rem;
+  }
+  .hero-title span { color: var(--green); font-style: normal; font-weight: 800; }
+  .hero-sub {
+    font-size: 0.88rem; letter-spacing: 0.15em;
+    color: var(--mid); text-transform: uppercase;
+    margin-top: 1.4rem; max-width: 50ch; line-height: 2.2; font-weight: 300;
+  }
+  .hero-line {
+    position: absolute; bottom: 0; left: 3.5rem; right: 3.5rem;
+    height: 0.5px; background: rgba(0,0,0,0.1);
+  }
+
+  section { padding: 8rem 3.5rem; }
+
+  .s-label {
+    font-size: 0.6rem; letter-spacing: 0.35em;
+    color: var(--green-mid); text-transform: uppercase;
+    margin-bottom: 3rem; font-weight: 400;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .s-label::after {
+    content: ''; flex: 0 0 40px; height: 0.5px; background: var(--green);
+  }
+
+  .purpose-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start;
+  }
+  .purpose-headline {
+    font-family: 'Jost', sans-serif;
+    font-size: clamp(2rem, 3.8vw, 3.2rem);
+    font-weight: 800; line-height: 1.2; color: var(--cream);
+    text-transform: uppercase;
+  }
+  .purpose-headline em { color: var(--green); font-style: normal; font-weight: 800; }
+  .purpose-body {
+    font-size: 1.05rem; line-height: 1.9; color: rgba(0,0,0,0.5);
+    margin-bottom: 1.5rem; font-weight: 300;
+  }
+  .stat-row {
+    display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 3rem;
+  }
+  .stat { border-top: 0.5px solid rgba(192,57,43,0.35); padding-top: 1.2rem; }
+  .stat-num {
+    font-family: 'Jost', sans-serif;
+    font-size: 2.6rem; font-weight: 800; color: var(--green); line-height: 1;
+  }
+  .stat-desc {
+    font-size: 0.82rem; letter-spacing: 0.08em;
+    color: var(--mid); text-transform: uppercase; margin-top: 0.5rem;
+    line-height: 1.7; font-weight: 300;
+  }
+
+  /* ── USER RESEARCH ── */
+  .interview-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+    margin-top: 4rem;
+  }
+  .interview-card { background: var(--off); padding: 2.5rem 2.2rem; border: 0.5px solid rgba(0,0,0,0.1); }
+  .interview-quote {
+    font-family: 'Jost', sans-serif; font-weight: 500; font-style: italic;
+    font-size: 1.05rem; line-height: 1.7; color: var(--cream);
+    margin-bottom: 1.6rem;
+  }
+  .interview-who {
+    font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--mid); margin-bottom: 1rem; font-weight: 300;
+  }
+  .interview-tag {
+    display: inline-block; font-size: 0.6rem; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--green);
+    border-top: 0.5px solid rgba(44,81,218,0.3); padding-top: 0.7rem; font-weight: 400;
+  }
+
+  /* ── USER TESTING ── */
+  .test-grid {
+    display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem;
+    margin-top: 4rem;
+  }
+  .test-card { background: var(--off); padding: 2.2rem 1.9rem; border: 0.5px solid rgba(0,0,0,0.1); }
+  .test-label {
+    display: inline-block; font-size: 0.58rem; letter-spacing: 0.18em;
+    text-transform: uppercase; font-weight: 700; padding: 0.35rem 0.8rem;
+    border-radius: 99px;
+  }
+  .test-label.issue { background: rgba(192,57,43,0.1); color: #c0392b; margin-bottom: 1rem; }
+  .test-label.fix { background: rgba(44,81,218,0.1); color: var(--green); margin: 1.4rem 0 1rem; }
+  .test-card p { font-size: 0.88rem; line-height: 1.75; color: rgba(0,0,0,0.55); font-weight: 300; }
+
+  /* ── VIDEOS as branding ── */
+  .videos-section {}
+  .videos-heading-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-bottom: 5rem; align-items: end;
+  }
+  .videos-heading {
+    font-family: 'Jost', sans-serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 800; line-height: 1.25;
+    text-transform: uppercase;
+  }
+  .videos-desc {
+    font-size: 1rem; line-height: 1.9;
+    color: rgba(0,0,0,0.45); font-weight: 300;
+  }
+
+  .video-brand-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 3px;
+  }
+  .video-brand-item {
+    position: relative; overflow: hidden; background: #0d0d0d;
+  }
+  .video-brand-item video {
+    width: 100%; display: block;
+    object-fit: cover;
+  }
+  .videos-tags { display: flex; gap: 0.8rem; margin-bottom: 2.5rem; }
+  .videos-tag {
+    font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--green-mid); border: 0.5px solid rgba(0,0,0,0.15);
+    padding: 0.5rem 1.1rem; border-radius: 99px; font-weight: 400;
+  }
+  .video-brand-item::after {
+    content: '';
+    position: absolute; inset: 0;
+    border: 0.5px solid rgba(192,57,43,0.15);
+    pointer-events: none;
+  }
+
+  .kp-grid {
+    display: grid; grid-template-columns: repeat(3,1fr); gap: 0;
+    border: 0.5px solid rgba(0,0,0,0.1);
+  }
+  .kp-item {
+    padding: 2.5rem 2rem;
+    background: #2c51da;
+    border-right: 0.5px solid rgba(255,255,255,0.15);
+    border-bottom: 0.5px solid rgba(255,255,255,0.15);
+    transition: background 0.35s;
+  }
+  .kp-item:hover { background: #1e3ec4; }
+  .kp-item:nth-child(3n) { border-right: none; }
+  .kp-num {
+    font-size: 0.7rem; color: rgba(255,255,255,0.5);
+    letter-spacing: 0.1em; margin-bottom: 1.2rem; font-weight: 400;
+  }
+  .kp-title {
+    font-size: 0.78rem; font-weight: 500;
+    color: #ffffff; letter-spacing: 0.04em;
+    margin-bottom: 0.8rem; line-height: 1.5;
+    text-transform: uppercase;
+  }
+  .kp-body {
+    font-size: 0.92rem; line-height: 1.85;
+    color: rgba(255,255,255,0.65); font-weight: 300;
+  }
+
+  .arch-inner {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;
+  }
+  .arch-heading {
+    font-family: 'Jost', sans-serif;
+    font-size: clamp(1.8rem, 2.8vw, 2.5rem);
+    font-weight: 800; margin-bottom: 2rem; line-height: 1.25;
+    text-transform: uppercase;
+  }
+  .arch-p {
+    font-size: 1rem; line-height: 1.9;
+    color: rgba(0,0,0,0.45); margin-bottom: 1.5rem; font-weight: 300;
+  }
+  .arch-roles { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1rem; }
+  .role-pill {
+    display: flex; align-items: center; gap: 1rem;
+    font-size: 0.68rem; letter-spacing: 0.1em;
+    color: rgba(0,0,0,0.4); text-transform: uppercase; font-weight: 300;
+  }
+  .role-pill::before {
+    content: ''; width: 28px; height: 0.5px;
+    background: var(--green); flex-shrink: 0;
+  }
+
+  /* ── DESIGN SYSTEM ── */
+  .design-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;
+  }
+  .design-label {
+    font-size: 0.65rem; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--green-mid); font-weight: 400; margin-bottom: 1.5rem;
+  }
+
+  /* type specimen */
+  .type-glyph-box {
+    position: relative; border: 0.5px solid rgba(0,0,0,0.1);
+    padding: 3.5rem 2rem 2.5rem; text-align: center; overflow: hidden;
+  }
+  .type-glyph-box::before {
+    content: 'Aa'; position: absolute; top: -0.35em; right: 0.3rem;
+    font-family: 'Basote', 'Jost', sans-serif; font-weight: 800;
+    font-size: clamp(6rem, 13vw, 9.5rem); color: rgba(44,81,218,0.06);
+    line-height: 1; pointer-events: none; z-index: 0;
+  }
+  .type-glyph {
+    position: relative; z-index: 1;
+    font-family: 'Basote', 'Jost', sans-serif; font-weight: 800;
+    font-size: clamp(4.5rem, 10vw, 7.5rem); line-height: 0.85;
+    color: var(--cream); margin-bottom: 1.2rem;
+  }
+  .type-glyph-name {
+    position: relative; z-index: 1;
+    font-family: 'Jost', sans-serif; font-weight: 800;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    font-size: 0.85rem; color: var(--green);
+  }
+  .type-glyph-tag {
+    position: relative; z-index: 1;
+    font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--mid); margin-top: 0.5rem;
+  }
+  .type-scale { margin-top: 2px; border: 0.5px solid rgba(0,0,0,0.1); border-top: none; }
+  .type-scale-row {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 1.2rem; padding: 1.1rem 1.5rem; border-top: 0.5px solid rgba(0,0,0,0.1);
+  }
+  .type-scale-row .tsr-label {
+    flex: 0 0 auto; font-size: 0.58rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--mid);
+  }
+  .type-scale-row .tsr-sample {
+    font-family: 'Basote', 'Jost', sans-serif; color: var(--cream);
+    text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .type-scale-row.display .tsr-sample { font-size: 1.8rem; font-weight: 800; text-transform: uppercase; }
+  .type-scale-row.heading .tsr-sample { font-size: 1.15rem; font-weight: 700; }
+  .type-scale-row.body .tsr-sample { font-size: 0.9rem; font-weight: 300; color: rgba(0,0,0,0.5); }
+
+  /* color palette, rounded swatches */
+  .palette-row {
+    display: flex; gap: 1rem;
+  }
+  .palette-swatch { flex: 1; }
+  .palette-swatch-color {
+    width: 100%; height: clamp(13.5rem, 9.6rem + 8.5vw, 16.25rem);
+    border-radius: 16px;
+  }
+  .palette-swatch-hex {
+    margin-top: 0.9rem; text-align: center;
+    font-size: 0.62rem; letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--mid); font-weight: 300;
+  }
+
+  .divider {
+    height: 0.5px; background: rgba(255,255,255,0.05); margin: 0 3.5rem;
+  }
+
+  #next-section{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid rgba(0,0,0,0.1)}
+  .next-back-iw{padding:4rem 3.5rem;border-right:1px solid rgba(0,0,0,0.1);display:flex;align-items:center;gap:1rem;text-decoration:none;color:rgba(0,0,0,0.3);font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;transition:color 0.2s}
+  .next-back-iw:hover{color:#000000}
+  .next-proj-iw{padding:4rem 3.5rem;display:flex;flex-direction:column;gap:0.5rem;text-decoration:none;transition:background 0.2s}
+  .next-proj-iw:hover{background:rgba(44,81,218,0.06)}
+  .next-lbl-iw{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:#666}
+  .next-ttl-iw{font-family:'Jost',sans-serif;font-weight:800;text-transform:uppercase;font-size:clamp(1.5rem,3vw,2.5rem);letter-spacing:0.04em;color:#000000;transition:color 0.2s}
+  .next-proj-iw:hover .next-ttl-iw{color:#2c51da}
+  .next-arr-iw{color:#2c51da;font-size:1.5rem;margin-top:0.5rem}
+
+  footer {
+    padding: 4rem 3.5rem;
+    border-top: 0.5px solid rgba(0,0,0,0.1);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-name {
+    font-size: 0.75rem; letter-spacing: 0.18em;
+    color: rgba(245,240,235,0.35); text-transform: uppercase; font-weight: 300;
+  }
+  .footer-note {
+    font-size: 0.62rem; letter-spacing: 0.2em;
+    color: rgba(245,240,235,0.18); text-transform: uppercase; font-weight: 300;
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .hero { padding: 0 1.5rem 4rem; }
+    section { padding: 5rem 1.5rem; }
+    .purpose-grid, .videos-heading-row, .video-brand-grid, .arch-inner, .proto-layout, .design-grid, .interview-grid, .test-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .proto-frame { max-width: 430px; }
+    .kp-grid { grid-template-columns: 1fr 1fr; }
+    .stat-row { grid-template-columns: 1fr 1fr; }
+    .divider { margin: 0 1.5rem; }
+    footer { padding: 3rem 1.5rem; flex-direction: column; gap: 1rem; }
+  }
+
+  /* ── LIVE PROTOTYPE ── */
+  .proto-section {}
+  .proto-layout {
+    display: grid; grid-template-columns: 1fr 490px;
+    gap: 5rem; align-items: center;
+  }
+  .proto-heading {
+    font-family: 'Jost', sans-serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 800; line-height: 1.25;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .proto-desc {
+    font-size: 1rem; line-height: 1.9;
+    color: rgba(0,0,0,0.45); font-weight: 300;
+  }
+  .proto-frame {
+    max-width: 490px; margin: 0 auto;
+  }
+
+  /* ── POSTER ── */
+  .poster-section {}
+  .poster-layout {
+    display: grid; grid-template-columns: 420px 1fr;
+    gap: 6rem; align-items: start;
+  }
+  .poster-frame {
+    position: relative;
+  }
+  .poster-frame img {
+    width: 100%; display: block;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.5), 0 0 0 0.5px rgba(0,0,0,0.1);
+  }
+  .poster-headline {
+    font-family: 'Jost', sans-serif;
+    font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+    font-weight: 800; line-height: 1.15;
+    text-transform: uppercase;
+    color: var(--cream); margin-bottom: 2rem;
+  }
+  .poster-body {
+    font-size: 1.05rem; line-height: 1.9;
+    color: rgba(245,240,235,0.52); margin-bottom: 1.4rem; font-weight: 300;
+  }
+  .poster-meta-row {
+    display: flex; flex-direction: column; gap: 1.2rem; margin-top: 3rem;
+    border-top: 0.5px solid rgba(255,255,255,0.07); padding-top: 2.5rem;
+  }
+  .poster-meta { display: flex; align-items: baseline; gap: 1.5rem; }
+  .poster-meta-label {
+    font-size: 0.6rem; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--green-mid); font-weight: 400; min-width: 60px;
+  }
+  .poster-meta-val {
+    font-size: 0.78rem; color: rgba(245,240,235,0.6);
+    font-weight: 300; letter-spacing: 0.04em;
+  }
+
+  /* ── CAMPAIGN BANNER ── */
+  .banner-heading {
+    font-family: 'Jost', sans-serif;
+    font-size: clamp(2rem, 3.8vw, 3.2rem); font-weight: 800; line-height: 1.15;
+    text-transform: uppercase; color: var(--cream); margin-bottom: 1.5rem;
+  }
+  .banner-heading em { color: var(--green); font-style: normal; font-weight: 800; }
+  .banner-desc {
+    font-size: 1.05rem; line-height: 1.9; color: rgba(0,0,0,0.5);
+    max-width: 720px; margin-bottom: 3rem; font-weight: 300;
+  }
+  .banner-grid {
+    display: flex; flex-direction: column; gap: 2rem;
+  }
+  .banner-grid img {
+    width: 100%; display: block;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.5), 0 0 0 0.5px rgba(0,0,0,0.1);
+  }
+
+  @media (max-width: 900px) {
+    .poster-layout { grid-template-columns: 1fr; gap: 3rem; }
+    .poster-frame { max-width: 320px; }
+  }
+
+</style>
+</head>
+<body>
+
+
+
+<div class="wrap">
+
+  <nav>
+    <a class="nav-name" href="index.html">Hengameh Koliyaei</a>
+    <span class="nav-tag">Portfolio — UX · Mobile</span>
+  </nav>
+
+  <section class="hero">
+    <p class="hero-eyebrow">Project 02 — Mobile Application</p>
+    <h1 class="hero-title">I<span>wave</span></h1>
+    <p class="hero-sub">Connecting students with scholarships, on-campus positions, donations &amp; student jobs — all in one platform</p>
+    <div class="hero-line"></div>
+  </section>
+
+  <section>
+    <div class="s-label">Design Purpose</div>
+    <div class="purpose-grid">
+      <div>
+        <h2 class="purpose-headline">Anyone who wants higher education has the <em>right</em> to study.</h2>
+      </div>
+      <div>
+        <p class="purpose-body">While UNESCO presents high tuition fees and exclusive entrance examinations as two main institutional barriers, tuition and cost of living shouldn't be an obstacle for students. Students should be informed easily about opportunities like grants, sponsorships, and financial aids — from private to public, from personal to organisation.</p>
+        <p class="purpose-body">Iwave is a platform that aggregates all types of academic financial aids and opportunities in one place — organised, fast, and social. Students can apply, connect, and wave support to peers on their path to education.</p>
+        <div class="stat-row">
+          <div class="stat">
+            <div class="stat-num">38%</div>
+            <div class="stat-desc">Students drop out due to financial problems</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">17%</div>
+            <div class="stat-desc">Of 18-year-olds in poorest UK areas go to university</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">70%</div>
+            <div class="stat-desc">Children in low-income countries suffer learning poverty</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section>
+    <div class="s-label">User Research</div>
+    <div class="purpose-grid">
+      <div>
+        <h2 class="purpose-headline">Five students.<br>One recurring <em>story</em>.</h2>
+      </div>
+      <div>
+        <p class="purpose-body">Before a single screen was designed, five semi-structured interviews were run with university students actively searching for financial aid — a mix of undergraduates and postgraduates recruited through university career centres and student groups, plus one conversation with a scholarship fund's program director.</p>
+        <p class="purpose-body">The same three problems surfaced again and again: opportunities are found too late, spread across too many disconnected sources, and applying feels like shouting into a void with no feedback.</p>
+      </div>
+    </div>
+
+    <div class="interview-grid">
+      <div class="interview-card">
+        <div class="interview-quote">"I found three different scholarships my senior year — after I'd already taken out a loan. Nobody told me they existed."</div>
+        <div class="interview-who">Amara, 21 — Communications, Canada</div>
+        <div class="interview-tag">Discovery comes too late</div>
+      </div>
+      <div class="interview-card">
+        <div class="interview-quote">"I have eleven tabs open with different scholarship sites and none of them talk to each other."</div>
+        <div class="interview-who">Diego, 23 — Engineering, Mexico</div>
+        <div class="interview-tag">Search is fragmented</div>
+      </div>
+      <div class="interview-card">
+        <div class="interview-quote">"I stopped applying after two rejections because I never understood why I wasn't chosen."</div>
+        <div class="interview-who">Sofia, 19 — Public Health, Nigeria</div>
+        <div class="interview-tag">No feedback loop</div>
+      </div>
+      <div class="interview-card">
+        <div class="interview-quote">"As a funder, I want to see the actual person I'm supporting — not just another form in a queue."</div>
+        <div class="interview-who">Marcus — Program Director, scholarship fund</div>
+        <div class="interview-tag">Supporters want a human connection</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- VIDEOS as branding -->
+  <section class="videos-section">
+    <div class="s-label">Prototype in Motion</div>
+    <div class="videos-heading-row">
+      <h2 class="videos-heading">Two flows.<br>One vision.</h2>
+      <p class="videos-desc">Interaction recordings capturing the Iwave student journey — from scholarship discovery through to the refined final prototype with a complete visual and interaction language.</p>
+    </div>
+    <div class="videos-tags">
+      <span class="videos-tag">Case Study</span>
+      <span class="videos-tag">User Experience</span>
+    </div>
+    <div class="video-brand-grid">
+      <div class="video-brand-item">
+        <video autoplay loop muted playsinline preload="auto">
+          <source src="iwave-brand-video-1.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="video-brand-item">
+        <video autoplay loop muted playsinline preload="auto">
+          <source src="iwave-brand-video-2.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- LIVE PROTOTYPE -->
+  <section class="proto-section">
+    <div class="s-label">Interactive Prototype</div>
+    <div class="proto-layout">
+      <div class="proto-info">
+        <h2 class="proto-heading">Try it<br>yourself.</h2>
+        <p class="proto-desc">A working click-through of the Iwave app — switch between the Student and Founder journeys, browse scholarships, review candidates, and submit an application, all inside a live mobile mockup.</p>
+      </div>
+      <div class="proto-frame">
+        <style>
+          .proto-frame{
+            --green:        #14944B;
+            --green-deep:   #0B6E39;
+            --green-shadow: #08532A;
+            --sky:          #4FB6E8;
+            --blue:         #3D4FE0;
+            --blue-deep:    #2B39B8;
+            --orange:       #F2994A;
+            --orange-deep:  #D97C29;
+            --red:          #E5382B;
+            --red-deep:     #B92A20;
+            --ink:          #12181A;
+            --paper:        #F6F7F1;
+            --paper-dim:    #E9ECE3;
+            --line:         #DDE1D6;
+            --font-display: ui-rounded, "SF Pro Rounded", "Segoe UI Rounded", system-ui, -apple-system, sans-serif;
+            --font-body:    -apple-system, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+            font-family:var(--font-body);
+            color:var(--ink);
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+            padding:1rem;
+            box-sizing:border-box;
+          }
+          .proto-frame *{ box-sizing:border-box; }
+
+          /* ---------- device ---------- */
+          .device{
+            width:min(430px,92vw);
+            aspect-ratio:430/932;
+            background:#05100a;
+            border-radius:clamp(28px,7vw,46px);
+            padding:clamp(10px,2.2vw,14px);
+            box-shadow:
+              0 30px 60px -20px rgba(0,0,0,.55),
+              0 0 0 1px rgba(255,255,255,.06) inset;
+            position:relative;
+          }
+          .device::before{
+            content:"";
+            position:absolute;
+            top:clamp(10px,2.2vw,14px);
+            left:50%;
+            transform:translateX(-50%);
+            width:34%;
+            height:clamp(18px,4vw,26px);
+            background:#05100a;
+            border-radius:0 0 16px 16px;
+            z-index:5;
+          }
+          .device-screen{
+            position:relative;
+            width:100%;
+            height:100%;
+            background:var(--paper);
+            border-radius:clamp(20px,5.5vw,36px);
+            overflow:hidden;
+            display:flex;
+            flex-direction:column;
+            font-size:clamp(12px,2.9vw,15px);
+          }
+
+          .statusbar{
+            flex:0 0 auto;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            padding:.9em 1.4em .4em;
+            font:700 .82em/1 var(--font-body);
+            font-variant-numeric:tabular-nums;
+          }
+          .statusbar .icons{ display:flex; gap:.35em; align-items:center; }
+          .statusbar svg{ width:1.1em; height:1.1em; display:block; }
+
+          .screen-body{
+            flex:1 1 auto;
+            min-height:0;
+            overflow-y:auto;
+            scrollbar-width:none;
+          }
+          .screen-body::-webkit-scrollbar{ display:none; }
+
+          .tabbar{
+            flex:0 0 auto;
+            display:flex;
+            justify-content:space-around;
+            align-items:center;
+            padding:.7em .5em calc(.7em + env(safe-area-inset-bottom,0px));
+            border-top:1px solid var(--line);
+            background:#fff;
+          }
+          .tabbar.hidden{ display:none; }
+          .tabbar button{
+            background:none;
+            border:none;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            gap:.25em;
+            color:#9AA39A;
+            font:600 .6em/1 var(--font-body);
+            letter-spacing:.02em;
+            padding:.3em .4em;
+            cursor:pointer;
+            flex:1 1 0;
+          }
+          .tabbar button svg{ width:1.3em; height:1.3em; }
+          .tabbar button.active{ color:var(--blue); }
+          .tabbar button:focus-visible{ outline:2px solid var(--blue); border-radius:8px; }
+
+          /* ================= SPLASH / ROLE PICKER ================= */
+          .splash{
+            height:100%;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            text-align:center;
+            padding:2em 1.5em 1.6em;
+            color:#fff;
+            background:
+              repeating-linear-gradient(90deg, rgba(79,182,232,.24) 0 8px, transparent 8px 20px),
+              linear-gradient(165deg, var(--green) 0%, var(--green-deep) 70%, var(--green-shadow) 100%);
+          }
+          .splash .mark{
+            width:3em; height:3em;
+            background:var(--red);
+            border-radius:28%;
+            display:flex; align-items:center; justify-content:center;
+            box-shadow:0 .5em 1.2em -.5em rgba(0,0,0,.5);
+            margin-bottom:.7em;
+          }
+          .splash .mark svg{ width:1.7em; height:1.7em; }
+          .splash .word{
+            font:900 1.9em/1 var(--font-display);
+            letter-spacing:-.02em;
+            margin:0 0 .2em;
+          }
+          .splash .tag{
+            font:600 .82em/1.4 var(--font-body);
+            color:rgba(255,255,255,.88);
+            max-width:24ch;
+            text-wrap:balance;
+            margin-bottom:1.3em;
+          }
+          .splash .ask{
+            font:800 1.05em/1.2 var(--font-display);
+            margin:.2em 0 1em;
+          }
+          .role-grid{
+            width:100%;
+            display:flex;
+            flex-direction:column;
+            gap:.8em;
+          }
+          .role-card{
+            display:flex;
+            align-items:center;
+            gap:.9em;
+            width:100%;
+            background:rgba(255,255,255,.1);
+            border:1px solid rgba(255,255,255,.32);
+            border-radius:18px;
+            padding:1em 1.1em;
+            color:#fff;
+            text-align:left;
+            cursor:pointer;
+            transition:background .15s ease, transform .15s ease;
+          }
+          .role-card:hover{ background:rgba(255,255,255,.18); }
+          .role-card:active{ transform:scale(.98); }
+          .role-card .ric{
+            width:2.6em; height:2.6em; border-radius:12px;
+            background:#fff; color:var(--green-deep);
+            display:flex; align-items:center; justify-content:center;
+            flex:0 0 auto;
+          }
+          .role-card .ric svg{ width:1.4em; height:1.4em; }
+          .role-card h3{ font:800 .95em/1.2 var(--font-display); margin:0 0 .2em; letter-spacing:-.005em; }
+          .role-card p{ font:600 .74em/1.35 var(--font-body); color:rgba(255,255,255,.82); margin:0; }
+          .role-card .go{ margin-left:auto; opacity:.8; flex:0 0 auto; }
+          .role-card .go svg{ width:1.1em; height:1.1em; }
+
+          /* ================= shared UI bits ================= */
+          .px{ padding-left:1.3em; padding-right:1.3em; }
+          .section-title{
+            font:800 .95em/1 var(--font-display);
+            letter-spacing:-.01em;
+            margin:1.3em 0 .7em;
+          }
+          .section-title.first{ margin-top:.2em; }
+          .chip{
+            display:inline-flex; align-items:center; gap:.4em;
+            font:700 .68em/1 var(--font-body);
+            padding:.5em .8em;
+            border-radius:99px;
+            white-space:nowrap;
+          }
+          .chip.orange{ background:#FDE9D4; color:var(--orange-deep); }
+          .chip.blue{ background:#DEE1FA; color:var(--blue-deep); }
+          .chip.green{ background:#D9F0E1; color:var(--green-deep); }
+          .chip.red{ background:#FBE1DE; color:var(--red-deep); }
+          .chip.neutral{ background:var(--paper-dim); color:#5B6259; }
+
+          .page-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:1em; }
+          .page-head h2{ font:800 1.15em/1.2 var(--font-display); margin:0; letter-spacing:-.01em; }
+          .page-head span.sub{ display:block; font:600 .75em/1 var(--font-body); color:#6B7268; margin-top:.25em; }
+          .icon-btn{
+            width:2.2em; height:2.2em; border-radius:50%;
+            background:#fff; border:1px solid var(--line);
+            display:flex; align-items:center; justify-content:center;
+            position:relative; flex:0 0 auto; cursor:pointer;
+          }
+          .icon-btn svg{ width:1.05em; height:1.05em; color:var(--ink); }
+          .icon-btn.dot::after{
+            content:""; position:absolute; top:.5em; right:.5em;
+            width:.5em; height:.5em; border-radius:50%;
+            background:var(--red); border:2px solid #fff;
+          }
+
+          .filter-row{
+            display:flex; gap:.5em; overflow-x:auto; padding-bottom:.2em; margin-bottom:1.1em;
+            scrollbar-width:none;
+          }
+          .filter-row::-webkit-scrollbar{ display:none; }
+          .filter-chip{
+            flex:0 0 auto;
+            font:700 .72em/1 var(--font-body);
+            padding:.6em 1em;
+            border-radius:99px;
+            background:#fff; border:1px solid var(--line); color:#5B6259;
+            cursor:pointer; white-space:nowrap;
+          }
+          .filter-chip.active{ background:var(--ink); border-color:var(--ink); color:#fff; }
+
+          /* ---- listing / candidate cards ---- */
+          .listing-card, .candidate-card{
+            display:flex; flex-direction:column; gap:.7em;
+            background:#fff; border:1px solid var(--line);
+            border-radius:18px; padding:1.05em;
+            margin-bottom:.8em;
+          }
+          .listing-card .top, .candidate-card .top{ display:flex; gap:.8em; align-items:flex-start; }
+          .logo-badge{
+            width:2.6em; height:2.6em; border-radius:11px; flex:0 0 auto;
+            display:flex; align-items:center; justify-content:center;
+            color:#fff; font:800 .8em/1 var(--font-display);
+          }
+          .listing-card h3, .candidate-card h3{ font:800 .92em/1.25 var(--font-display); margin:0 0 .15em; letter-spacing:-.005em; }
+          .listing-card .meta, .candidate-card .meta{ font:600 .74em/1.4 var(--font-body); color:#6B7268; }
+          .listing-card .blurb, .candidate-card .quote{
+            font:500 .78em/1.5 var(--font-body); color:#40473F; margin:0;
+          }
+          .candidate-card .quote{ font-style:italic; }
+          .tagrow{ display:flex; gap:.4em; flex-wrap:wrap; }
+          .btn{
+            display:inline-flex; align-items:center; justify-content:center; gap:.4em;
+            font:800 .82em/1 var(--font-body);
+            padding:.85em 1em;
+            border-radius:13px;
+            border:none; cursor:pointer;
+            width:100%;
+          }
+          .btn.primary{ background:var(--blue); color:#fff; }
+          .btn.primary:active{ background:var(--blue-deep); }
+          .btn.outline{ background:#fff; color:var(--ink); border:1.5px solid var(--line); }
+          .btn.success{ background:var(--green); color:#fff; }
+          .btn.danger-outline{ background:#fff; color:var(--red-deep); border:1.5px solid #F3C9C4; }
+          .btn.disabled{ opacity:.55; pointer-events:none; }
+          .btn-row{ display:flex; gap:.6em; }
+          .btn-row .btn{ width:auto; flex:1 1 0; }
+
+          /* ---- detail / push screens ---- */
+          .detail-header{ display:flex; align-items:center; gap:.7em; margin-bottom:1.1em; }
+          .back-btn{
+            width:2.1em; height:2.1em; border-radius:50%;
+            background:#fff; border:1px solid var(--line);
+            display:flex; align-items:center; justify-content:center; flex:0 0 auto; cursor:pointer;
+          }
+          .back-btn svg{ width:1.05em; height:1.05em; }
+          .detail-header h2{ font:800 1.02em/1.25 var(--font-display); margin:0; letter-spacing:-.005em; }
+          .detail-header span{ display:block; font:600 .72em/1 var(--font-body); color:#6B7268; margin-top:.2em; }
+
+          .summary-card{
+            background:#fff; border:1px solid var(--line); border-radius:16px;
+            padding:1em 1.1em; margin-bottom:1.2em;
+            display:flex; gap:1em;
+          }
+          .summary-card .cell{ flex:1; text-align:center; }
+          .summary-card .cell b{ display:block; font:800 1.05em/1 var(--font-display); }
+          .summary-card .cell small{ display:block; font:700 .62em/1.3 var(--font-body); color:#8A9188; text-transform:uppercase; letter-spacing:.04em; margin-top:.3em; }
+
+          .field{ margin-bottom:1.1em; }
+          .field label{ display:block; font:800 .74em/1 var(--font-body); text-transform:uppercase; letter-spacing:.05em; color:#6B7268; margin-bottom:.5em; }
+          .field textarea{
+            width:100%; min-height:6.5em; resize:vertical;
+            font:500 .85em/1.5 var(--font-body); color:var(--ink);
+            background:#fff; border:1.5px solid var(--line); border-radius:14px;
+            padding:.85em 1em;
+          }
+          .field textarea:focus{ outline:none; border-color:var(--blue); }
+          .file-chip{
+            display:flex; align-items:center; gap:.7em;
+            background:#fff; border:1.5px dashed var(--line); border-radius:14px;
+            padding:.8em 1em;
+          }
+          .file-chip .fic{
+            width:2em; height:2em; border-radius:9px; background:#DEE1FA; color:var(--blue-deep);
+            display:flex; align-items:center; justify-content:center; flex:0 0 auto;
+          }
+          .file-chip .fic svg{ width:1.05em; height:1.05em; }
+          .file-chip .name{ font:700 .78em/1.3 var(--font-body); flex:1 1 auto; }
+          .file-chip .swap{ font:700 .72em/1 var(--font-body); color:var(--blue); background:none; border:none; cursor:pointer; }
+
+          .success-panel{
+            display:flex; flex-direction:column; align-items:center; text-align:center;
+            padding:2.5em 1em 1em;
+          }
+          .success-panel .check{
+            width:3.4em; height:3.4em; border-radius:50%; background:#D9F0E1; color:var(--green-deep);
+            display:flex; align-items:center; justify-content:center; margin-bottom:1em;
+          }
+          .success-panel .check svg{ width:1.8em; height:1.8em; }
+          .success-panel h3{ font:800 1.05em/1.3 var(--font-display); margin:0 0 .4em; }
+          .success-panel p{ font:500 .82em/1.5 var(--font-body); color:#6B7268; max-width:26ch; margin:0 0 1.6em; }
+
+          /* ---- feed / community ---- */
+          .feed-compose{
+            display:flex; align-items:center; gap:.7em;
+            background:#fff; border:1px solid var(--line); border-radius:16px;
+            padding:.8em 1em; margin-bottom:1.2em;
+          }
+          .feed-compose .mini-avatar{
+            width:2em; height:2em; border-radius:50%; background:var(--orange); color:#fff;
+            display:flex; align-items:center; justify-content:center; font:800 .68em/1 var(--font-display); flex:0 0 auto;
+          }
+          .feed-compose .placeholder{ font:500 .8em/1 var(--font-body); color:#9AA39A; flex:1 1 auto; }
+          .feed-post{
+            background:#fff; border:1px solid var(--line); border-radius:18px;
+            padding:1em 1.1em; margin-bottom:.8em;
+          }
+          .feed-post .who{ display:flex; align-items:center; gap:.7em; margin-bottom:.7em; }
+          .feed-post .mini-avatar{
+            width:2.2em; height:2.2em; border-radius:50%; color:#fff;
+            display:flex; align-items:center; justify-content:center; font:800 .7em/1 var(--font-display); flex:0 0 auto;
+          }
+          .feed-post .who b{ display:block; font:800 .82em/1.2 var(--font-display); }
+          .feed-post .who span{ display:block; font:600 .7em/1.3 var(--font-body); color:#8A9188; }
+          .feed-post p{ font:500 .84em/1.55 var(--font-body); color:#2A302A; margin:0 0 .8em; }
+          .feed-post .stats{ display:flex; gap:1.1em; }
+          .feed-post .stats span{
+            display:inline-flex; align-items:center; gap:.35em;
+            font:700 .72em/1 var(--font-body); color:#8A9188;
+          }
+          .feed-post .stats svg{ width:1em; height:1em; }
+
+          /* ---- applications list ---- */
+          .app-row{
+            display:flex; align-items:center; gap:.9em;
+            background:#fff; border:1px solid var(--line); border-radius:16px;
+            padding:.95em 1.05em; margin-bottom:.7em;
+          }
+          .app-row .abadge{
+            width:2.4em; height:2.4em; border-radius:10px; color:#fff;
+            display:flex; align-items:center; justify-content:center; font:800 .72em/1 var(--font-display); flex:0 0 auto;
+          }
+          .app-row .info{ flex:1 1 auto; min-width:0; }
+          .app-row .info h4{ font:800 .84em/1.25 var(--font-display); margin:0 0 .15em; letter-spacing:-.005em; }
+          .app-row .info span{ font:600 .7em/1.3 var(--font-body); color:#8A9188; }
+
+          /* ---- profile shared ---- */
+          .profile-head{ display:flex; flex-direction:column; align-items:center; text-align:center; padding:.4em 0 1.2em; }
+          .avatar{
+            width:4.2em; height:4.2em; border-radius:50%;
+            background:var(--orange); color:#fff;
+            display:flex; align-items:center; justify-content:center;
+            font:800 1.3em/1 var(--font-display);
+            margin-bottom:.6em;
+          }
+          .avatar.org{ border-radius:16px; background:var(--blue); }
+          .profile-head h2{ font:800 1.05em/1.2 var(--font-display); margin:0 0 .2em; letter-spacing:-.01em; }
+          .profile-head p{ font:600 .78em/1.4 var(--font-body); color:#6B7268; margin:0; max-width:26ch; }
+
+          .stat-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:.6em; margin-bottom:1.4em; }
+          .stat-grid .cell{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:.8em .5em; text-align:center; }
+          .stat-grid .num{ font:800 1.1em/1 var(--font-display); letter-spacing:-.01em; font-variant-numeric:tabular-nums; }
+          .stat-grid .lbl{ font:700 .58em/1.3 var(--font-body); color:#8A9188; text-transform:uppercase; letter-spacing:.05em; margin-top:.3em; }
+
+          .list-row{
+            display:flex; align-items:center; gap:.8em;
+            background:#fff; border-bottom:1px solid var(--line);
+            padding:.95em 1.1em;
+          }
+          .list-row:first-child{ border-radius:14px 14px 0 0; }
+          .list-row:last-child{ border-radius:0 0 14px 14px; border-bottom:none; }
+          .list-row .ic{
+            width:2em; height:2em; border-radius:9px;
+            display:flex; align-items:center; justify-content:center;
+            flex:0 0 auto;
+          }
+          .list-row .ic svg{ width:1.05em; height:1.05em; }
+          .list-row span{ font:700 .85em/1 var(--font-body); flex:1 1 auto; }
+          .list-row.danger span{ color:var(--red); }
+          .list-wrap{ background:#fff; border:1px solid var(--line); border-radius:14px; overflow:hidden; }
+        </style>
+
+        <div class="device">
+          <div class="device-screen">
+            <div class="statusbar" id="iwaveProtoStatusbar">
+              <span>9:41</span>
+              <span class="icons">
+                <svg viewBox="0 0 20 12" fill="currentColor"><rect x="0" y="7" width="3" height="5" rx="1"/><rect x="5" y="4.5" width="3" height="7.5" rx="1"/><rect x="10" y="2" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+                <svg viewBox="0 0 24 12" fill="none"><rect x=".5" y=".5" width="21" height="11" rx="2.5" stroke="currentColor"/><rect x="2" y="2" width="15" height="8" rx="1.3" fill="currentColor"/><rect x="22.5" y="4" width="1.5" height="4" rx="1" fill="currentColor"/></svg>
+              </span>
+            </div>
+            <div class="screen-body px" id="iwaveProtoScreenBody"></div>
+            <div class="tabbar hidden" id="iwaveProtoTabbar"></div>
+          </div>
+        </div>
+
+        <script>
+        (function(){
+          var body = document.getElementById('iwaveProtoScreenBody');
+          var tabbar = document.getElementById('iwaveProtoTabbar');
+
+          var ICON = {
+            search: '<circle cx="11" cy="11" r="6"/><path d="M20 20l-4.3-4.3"/>',
+            users: '<circle cx="9" cy="8" r="3"/><path d="M2.5 19c1.2-3.5 3.8-5 6.5-5s5.3 1.5 6.5 5"/><circle cx="17" cy="8" r="2.4"/><path d="M15.5 11.5c2 .2 3.7 1.6 4.5 3.8"/>',
+            clipboard: '<rect x="5" y="4" width="14" height="17" rx="2"/><rect x="8.5" y="2" width="7" height="4" rx="1.2"/><path d="M8.5 12h7M8.5 16h5"/>',
+            user: '<circle cx="12" cy="8" r="3.5"/><path d="M4.5 20c1.7-4 5-5.5 7.5-5.5S18.8 16 20.5 20"/>',
+            briefcase: '<rect x="3" y="8" width="18" height="11" rx="2"/><path d="M8 8V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/>',
+            gift: '<rect x="4" y="9" width="16" height="11" rx="1.5"/><path d="M4 9h16v3H4z"/><path d="M12 9v11"/><path d="M12 9C10 9 8.5 7.7 8.5 6.2 8.5 5 9.4 4 10.6 4 11.7 4 12 6 12 9Z"/><path d="M12 9c2 0 3.5-1.3 3.5-2.8C15.5 5 14.6 4 13.4 4 12.3 4 12 6 12 9Z"/>',
+            building: '<rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M8 8h2M14 8h2M8 12h2M14 12h2M8 16h2M14 16h2"/>',
+            chevronLeft: '<path d="M15 5l-7 7 7 7"/>',
+            paperclip: '<path d="M8 12.5l6.5-6.5a3 3 0 1 1 4.2 4.2L11 18a5 5 0 1 1-7-7l7-7"/>',
+            heart: '<path d="M12 20.5s-7.5-4.6-9.7-9A5.2 5.2 0 0 1 12 6.3 5.2 5.2 0 0 1 21.7 11.5c-2.2 4.4-9.7 9-9.7 9Z"/>',
+            message: '<path d="M4 5h16v11H8l-4 4Z"/>',
+            check: '<path d="M5 12l5 5L19 7"/>',
+            plus: '<path d="M12 5v14M5 12h14"/>'
+          };
+          function icon(name, cls){
+            return '<svg class="' + (cls||'') + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + ICON[name] + '</svg>';
+          }
+
+          var FOUNDERS = [
+            { name:'Horizon STEM Fund', amt:'$15,000/yr', field:'STEM · Undergrad', deadline:'Aug 30', color:'var(--blue)',
+              blurb:'Supporting first-generation students pursuing engineering and computer science degrees.', applicants:126 },
+            { name:'Global Futures Grant', amt:'$8,000 one-time', field:'Any major · Grad', deadline:'Sep 15', color:'var(--orange)',
+              blurb:'For admitted students who demonstrate significant financial need, regardless of field.', applicants:284 },
+            { name:'Women in Tech Award', amt:'$12,000/yr', field:'Computer Science', deadline:'Oct 1', color:'var(--green)',
+              blurb:'Backing women and non-binary students entering technology and data fields.', applicants:97 }
+          ];
+
+          var CANDIDATES = [
+            { name:'Priya Nair', uni:'University of Toronto', major:'Computer Science', gpa:'3.9', color:'var(--blue)',
+              quote:'"I built a low-cost water sensor for my village and want to keep building for people who need it most."' },
+            { name:'Diego Hernández', uni:'UNAM', major:'Mechanical Engineering', gpa:'3.7', color:'var(--orange)',
+              quote:'"I was accepted into my dream program — tuition is the only thing standing between me and my degree."' },
+            { name:'Sofia Adeyemi', uni:'University of Lagos', major:'Public Health', gpa:'3.8', color:'var(--green)',
+              quote:'"I want to bring maternal healthcare training back to my community once I graduate."' }
+          ];
+
+          var FEED = [
+            { name:'Marcus Ade', uni:'Nairobi · Applying to 3 funds', color:'var(--blue)', init:'MA',
+              text:'Just got an interview request from Horizon STEM Fund! Anyone have tips on what they ask in the funder call?',
+              likes:24, comments:9 },
+            { name:'Lena Kowalski', uni:'Warsaw · Accepted, Fall 2026', color:'var(--orange)', init:'LK',
+              text:'Sharing my motivation letter template that got me two offers — happy to review anyone’s draft this week.',
+              likes:58, comments:21 },
+            { name:'Tariq Osei', uni:'Accra · Applying to 5 funds', color:'var(--green)', init:'TO',
+              text:'Reminder: Global Futures Grant closes Sep 15. Financial need statements matter more than GPA here.',
+              likes:33, comments:6 }
+          ];
+
+          var APPLICATIONS = [
+            { fund:'Horizon STEM Fund', color:'var(--blue)', amt:'$15,000/yr', date:'Applied Jul 2', status:'Interview', chip:'orange' },
+            { fund:'Women in Tech Award', color:'var(--green)', amt:'$12,000/yr', date:'Applied Jun 20', status:'Under review', chip:'blue' },
+            { fund:'Global Futures Grant', color:'var(--orange)', amt:'$8,000', date:'Applied May 30', status:'Accepted', chip:'green' },
+            { fund:'Bright Path Fellowship', color:'#8B5CF6', amt:'$5,000', date:'Applied May 12', status:'Declined', chip:'red' }
+          ];
+
+          var state = { screen:'splash', founderIdx:0, candidateIdx:0, applySent:false, decision:null };
+
+          var STUDENT_TABS = [
+            { key:'student-discover', label:'Discover', icon:'search' },
+            { key:'student-feed', label:'Community', icon:'users' },
+            { key:'student-applications', label:'Applications', icon:'clipboard' },
+            { key:'student-profile', label:'Profile', icon:'user' }
+          ];
+          var FOUNDER_TABS = [
+            { key:'founder-candidates', label:'Candidates', icon:'briefcase' },
+            { key:'founder-scholarships', label:'Scholarships', icon:'gift' },
+            { key:'founder-profile', label:'Profile', icon:'building' }
+          ];
+          var DETAIL_BACK = { 'student-apply':'student-discover', 'founder-detail':'founder-candidates' };
+
+          function personaOf(s){
+            if (s === 'splash') return null;
+            return s.indexOf('student-') === 0 ? 'student' : 'founder';
+          }
+
+          var screens = {
+
+            splash: function(){
+              return (
+                '<div class="splash">' +
+                  '<div class="mark">' + icon('users') + '</div>' +
+                  '<div class="word">Iwave</div>' +
+                  '<div class="tag">Where accepted students meet the funders who cover tuition.</div>' +
+                  '<div class="ask">Which one are you?</div>' +
+                  '<div class="role-grid">' +
+                    '<div class="role-card" data-target="student-discover">' +
+                      '<div class="ric">' + icon('user') + '</div>' +
+                      '<div><h3>I’m a Student</h3><p>Find funders, apply with your CV, and join the community.</p></div>' +
+                      '<div class="go">' + icon('search') + '</div>' +
+                    '</div>' +
+                    '<div class="role-card" data-target="founder-candidates">' +
+                      '<div class="ric">' + icon('gift') + '</div>' +
+                      '<div><h3>I’m a Founder</h3><p>Review student CVs and fund the ones you believe in.</p></div>' +
+                      '<div class="go">' + icon('search') + '</div>' +
+                    '</div>' +
+                  '</div>' +
+                '</div>'
+              );
+            },
+
+            /* ================= STUDENT ================= */
+
+            'student-discover': function(){
+              var cards = FOUNDERS.map(function(f, i){
+                return (
+                  '<div class="listing-card">' +
+                    '<div class="top">' +
+                      '<div class="logo-badge" style="background:' + f.color + '">' + f.name.split(' ').map(function(w){return w[0];}).slice(0,2).join('') + '</div>' +
+                      '<div><h3>' + f.name + '</h3><div class="meta">' + f.amt + ' · Closes ' + f.deadline + '</div></div>' +
+                    '</div>' +
+                    '<p class="blurb">' + f.blurb + '</p>' +
+                    '<div class="tagrow"><span class="chip neutral">' + f.field + '</span><span class="chip neutral">' + f.applicants + ' applicants</span></div>' +
+                    '<button class="btn primary" data-target="student-apply" data-founder="' + i + '">View &amp; apply</button>' +
+                  '</div>'
+                );
+              }).join('');
+              return (
+                '<div class="page-head"><h2>Discover<span class="sub">' + FOUNDERS.length + ' open funds match your profile</span></h2>' + icon('search','icon-btn') + '</div>' +
+                '<div class="filter-row">' +
+                  '<span class="filter-chip active">All</span><span class="filter-chip">STEM</span><span class="filter-chip">Need-based</span><span class="filter-chip">Grad school</span><span class="filter-chip">Arts</span>' +
+                '</div>' +
+                cards +
+                '<div style="height:1.2em"></div>'
+              );
+            },
+
+            'student-apply': function(){
+              var f = FOUNDERS[state.founderIdx];
+              if (state.applySent){
+                return (
+                  '<div class="detail-header"><button class="back-btn" data-target="student-discover">' + icon('chevronLeft') + '</button><div><h2>' + f.name + '</h2></div></div>' +
+                  '<div class="success-panel">' +
+                    '<div class="check">' + icon('check') + '</div>' +
+                    '<h3>Application sent</h3>' +
+                    '<p>' + f.name + ' will review your CV and motivation letter and reach out through Iwave.</p>' +
+                    '<button class="btn primary" style="width:auto;padding:.9em 1.6em" data-target="student-applications">Track this application</button>' +
+                  '</div>'
+                );
+              }
+              return (
+                '<div class="detail-header"><button class="back-btn" data-target="student-discover">' + icon('chevronLeft') + '</button><div><h2>' + f.name + '</h2><span>' + f.amt + ' · Closes ' + f.deadline + '</span></div></div>' +
+                '<p class="blurb" style="margin-bottom:1.2em">' + f.blurb + '</p>' +
+                '<div class="field"><label>Your CV</label>' +
+                  '<div class="file-chip"><div class="fic">' + icon('paperclip') + '</div><span class="name">Amara_Diallo_CV.pdf</span><button class="swap">Replace</button></div>' +
+                '</div>' +
+                '<div class="field"><label>Motivation letter</label>' +
+                  '<textarea>Dear Horizon STEM Fund team, I’m a first-generation engineering student who was just accepted to my top-choice program. Your fund’s focus on first-gen students speaks directly to my story…</textarea>' +
+                '</div>' +
+                '<button class="btn primary" data-action="submit-application">Send application</button>'
+              );
+            },
+
+            'student-feed': function(){
+              var posts = FEED.map(function(p){
+                return (
+                  '<div class="feed-post">' +
+                    '<div class="who"><div class="mini-avatar" style="background:' + p.color + '">' + p.init + '</div><div><b>' + p.name + '</b><span>' + p.uni + '</span></div></div>' +
+                    '<p>' + p.text + '</p>' +
+                    '<div class="stats"><span>' + icon('heart') + ' ' + p.likes + '</span><span>' + icon('message') + ' ' + p.comments + '</span></div>' +
+                  '</div>'
+                );
+              }).join('');
+              return (
+                '<div class="page-head"><h2>Community<span class="sub">Applicants helping applicants</span></h2>' + icon('search','icon-btn') + '</div>' +
+                '<div class="feed-compose"><div class="mini-avatar" style="background:var(--orange)">AD</div><div class="placeholder">Share an update, ask for advice…</div></div>' +
+                posts +
+                '<div style="height:1.2em"></div>'
+              );
+            },
+
+            'student-applications': function(){
+              var rows = APPLICATIONS.map(function(a){
+                return (
+                  '<div class="app-row">' +
+                    '<div class="abadge" style="background:' + a.color + '">' + a.fund.split(' ').map(function(w){return w[0];}).slice(0,2).join('') + '</div>' +
+                    '<div class="info"><h4>' + a.fund + '</h4><span>' + a.amt + ' · ' + a.date + '</span></div>' +
+                    '<span class="chip ' + a.chip + '">' + a.status + '</span>' +
+                  '</div>'
+                );
+              }).join('');
+              return (
+                '<div class="page-head"><h2>Applications<span class="sub">' + APPLICATIONS.length + ' funds you’ve applied to</span></h2></div>' +
+                rows +
+                '<div style="height:1.2em"></div>'
+              );
+            },
+
+            'student-profile': function(){
+              return (
+                '<div class="profile-head">' +
+                  '<div class="avatar">AD</div>' +
+                  '<h2>Amara Diallo</h2>' +
+                  '<p>B.A. Communications · University of Toronto · Accepted Fall 2026</p>' +
+                '</div>' +
+                '<div class="stat-grid">' +
+                  '<div class="cell"><div class="num">4</div><div class="lbl">Applied</div></div>' +
+                  '<div class="cell"><div class="num">3.7</div><div class="lbl">GPA</div></div>' +
+                  '<div class="cell"><div class="num">62</div><div class="lbl">Profile views</div></div>' +
+                '</div>' +
+                '<div class="list-wrap">' +
+                  row('#DEE1FA','var(--blue-deep)', ICON.clipboard, 'Your CV') +
+                  row('#FDE9D4','var(--orange-deep)', ICON.message, 'Motivation letter') +
+                  row('#D9F0E1','var(--green-deep)', ICON.plus, 'Notifications') +
+                  row('#EFEFEF','#5B6259', ICON.user, 'Account') +
+                '</div>' +
+                '<div style="height:1em"></div>' +
+                '<div class="list-wrap"><div class="list-row danger"><span>Log out</span></div></div>' +
+                '<div style="height:1.4em"></div>'
+              );
+            },
+
+            /* ================= FOUNDER ================= */
+
+            'founder-candidates': function(){
+              var cards = CANDIDATES.map(function(c, i){
+                return (
+                  '<div class="candidate-card">' +
+                    '<div class="top">' +
+                      '<div class="logo-badge" style="background:' + c.color + '">' + c.name.split(' ').map(function(w){return w[0];}).slice(0,2).join('') + '</div>' +
+                      '<div><h3>' + c.name + '</h3><div class="meta">' + c.major + ' · GPA ' + c.gpa + '<br>' + c.uni + '</div></div>' +
+                    '</div>' +
+                    '<p class="quote">' + c.quote + '</p>' +
+                    '<button class="btn primary" data-target="founder-detail" data-candidate="' + i + '">Review candidate</button>' +
+                  '</div>'
+                );
+              }).join('');
+              return (
+                '<div class="page-head"><h2>Candidates<span class="sub">' + CANDIDATES.length + ' students match Horizon STEM Fund</span></h2>' + icon('search','icon-btn') + '</div>' +
+                '<div class="filter-row">' +
+                  '<span class="filter-chip active">All</span><span class="filter-chip">GPA 3.5+</span><span class="filter-chip">STEM</span><span class="filter-chip">First-gen</span>' +
+                '</div>' +
+                cards +
+                '<div style="height:1.2em"></div>'
+              );
+            },
+
+            'founder-detail': function(){
+              var c = CANDIDATES[state.candidateIdx];
+              var decided = state.decision;
+              return (
+                '<div class="detail-header"><button class="back-btn" data-target="founder-candidates">' + icon('chevronLeft') + '</button><div><h2>' + c.name + '</h2><span>' + c.uni + '</span></div></div>' +
+                '<div class="summary-card">' +
+                  '<div class="cell"><b>' + c.gpa + '</b><small>GPA</small></div>' +
+                  '<div class="cell"><b>' + c.major.split(' ')[0] + '</b><small>Major</small></div>' +
+                  '<div class="cell"><b>2026</b><small>Grad year</small></div>' +
+                '</div>' +
+                '<div class="field"><label>CV summary</label>' +
+                  '<div class="file-chip"><div class="fic">' + icon('paperclip') + '</div><span class="name">' + c.name.replace(' ','_') + '_CV.pdf</span></div>' +
+                '</div>' +
+                '<div class="field"><label>Motivation letter</label><p class="blurb">' + c.quote + '</p></div>' +
+                (decided === 'accepted'
+                  ? '<button class="btn success disabled">Funded ✓</button>'
+                  : decided === 'declined'
+                    ? '<button class="btn outline disabled">Declined</button>'
+                    : '<div class="btn-row"><button class="btn danger-outline" data-action="decline">Decline</button><button class="btn success" data-action="accept">Accept &amp; fund</button></div>'
+                )
+              );
+            },
+
+            'founder-scholarships': function(){
+              var rows = FOUNDERS.map(function(f){
+                return (
+                  '<div class="app-row">' +
+                    '<div class="abadge" style="background:' + f.color + '">' + f.name.split(' ').map(function(w){return w[0];}).slice(0,2).join('') + '</div>' +
+                    '<div class="info"><h4>' + f.name + '</h4><span>' + f.amt + ' · ' + f.applicants + ' applicants</span></div>' +
+                    '<span class="chip green">Open</span>' +
+                  '</div>'
+                );
+              }).join('');
+              return (
+                '<div class="page-head"><h2>Your scholarships<span class="sub">3 active listings</span></h2>' + icon('plus','icon-btn') + '</div>' +
+                rows +
+                '<div style="height:1.2em"></div>'
+              );
+            },
+
+            'founder-profile': function(){
+              return (
+                '<div class="profile-head">' +
+                  '<div class="avatar org">HS</div>' +
+                  '<h2>Horizon STEM Fund</h2>' +
+                  '<p>Supporting first-generation students in engineering and computer science since 2019.</p>' +
+                '</div>' +
+                '<div class="stat-grid">' +
+                  '<div class="cell"><div class="num">42</div><div class="lbl">Funded</div></div>' +
+                  '<div class="cell"><div class="num">$610k</div><div class="lbl">Given</div></div>' +
+                  '<div class="cell"><div class="num">3</div><div class="lbl">Active</div></div>' +
+                '</div>' +
+                '<div class="list-wrap">' +
+                  row('#DEE1FA','var(--blue-deep)', ICON.gift, 'Scholarships') +
+                  row('#FDE9D4','var(--orange-deep)', ICON.clipboard, 'Payment methods') +
+                  row('#D9F0E1','var(--green-deep)', ICON.plus, 'Notifications') +
+                  row('#EFEFEF','#5B6259', ICON.building, 'Organization') +
+                '</div>' +
+                '<div style="height:1em"></div>' +
+                '<div class="list-wrap"><div class="list-row danger"><span>Log out</span></div></div>' +
+                '<div style="height:1.4em"></div>'
+              );
+            }
+          };
+
+          function row(bg, fg, iconPath, label){
+            return (
+              '<div class="list-row">' +
+                '<div class="ic" style="background:' + bg + ';color:' + fg + '">' +
+                  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + iconPath + '</svg>' +
+                '</div>' +
+                '<span>' + label + '</span>' +
+              '</div>'
+            );
+          }
+
+          function renderTabbar(persona, current){
+            var tabs = persona === 'student' ? STUDENT_TABS : FOUNDER_TABS;
+            tabbar.innerHTML = tabs.map(function(t){
+              return '<button data-target="' + t.key + '" class="' + (t.key === current ? 'active' : '') + '">' + icon(t.icon) + t.label + '</button>';
+            }).join('');
+          }
+
+          function setScreen(name){
+            state.screen = name;
+            body.innerHTML = screens[name]();
+            body.scrollTop = 0;
+
+            var persona = personaOf(name);
+            var isDetail = DETAIL_BACK.hasOwnProperty(name);
+
+            if (!persona || isDetail){
+              tabbar.classList.add('hidden');
+            } else {
+              tabbar.classList.remove('hidden');
+              renderTabbar(persona, name);
+            }
+          }
+
+          tabbar.addEventListener('click', function(e){
+            var t = e.target.closest('[data-target]');
+            if (t) setScreen(t.dataset.target);
+          });
+
+          body.addEventListener('click', function(e){
+            var founderCard = e.target.closest('[data-founder]');
+            if (founderCard){ state.founderIdx = +founderCard.dataset.founder; state.applySent = false; }
+
+            var candidateCard = e.target.closest('[data-candidate]');
+            if (candidateCard){ state.candidateIdx = +candidateCard.dataset.candidate; state.decision = null; }
+
+            var action = e.target.closest('[data-action]');
+            if (action){
+              var a = action.dataset.action;
+              if (a === 'submit-application'){ state.applySent = true; setScreen('student-apply'); return; }
+              if (a === 'accept'){ state.decision = 'accepted'; setScreen('founder-detail'); return; }
+              if (a === 'decline'){ state.decision = 'declined'; setScreen('founder-detail'); return; }
+            }
+
+            var t = e.target.closest('[data-target]');
+            if (t) setScreen(t.dataset.target);
+          });
+
+          setScreen('splash');
+        })();
+        </script>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section>
+    <div class="s-label">User Testing</div>
+    <div class="purpose-grid">
+      <div>
+        <h2 class="purpose-headline">Six sessions.<br>Three real <em>fixes</em>.</h2>
+      </div>
+      <div>
+        <p class="purpose-body">The interactive prototype was handed to six participants — four students and two supporters — for moderated, task-based usability sessions run remotely and in person. Each person was asked to discover a scholarship, submit an application, and (for supporters) review a candidate, thinking aloud the whole way through.</p>
+        <p class="purpose-body">Every session was scored on task completion and followed by a short debrief. The friction points that came up more than once were treated as real problems, not one-off confusion, and fed straight back into the prototype.</p>
+        <div class="stat-row">
+          <div class="stat">
+            <div class="stat-num">83%</div>
+            <div class="stat-desc">Tasks completed without help on the first attempt</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">6</div>
+            <div class="stat-desc">Usability sessions, remote and in-person</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">3</div>
+            <div class="stat-desc">Rounds of iteration before the final prototype</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="test-grid">
+      <div class="test-card">
+        <span class="test-label issue">Issue</span>
+        <p>Three of six testers scrolled straight past the "View &amp; apply" button on the first scholarship card, looking for a separate apply tab.</p>
+        <span class="test-label fix">Fix</span>
+        <p>Moved the primary action into a fixed, high-contrast button and added a persistent tab-bar shortcut to it.</p>
+      </div>
+      <div class="test-card">
+        <span class="test-label issue">Issue</span>
+        <p>On the supporter side, testers couldn't tell at a glance whether a candidate had already been reviewed.</p>
+        <span class="test-label fix">Fix</span>
+        <p>Added visible status chips — Reviewed, Funded, Declined — directly on each candidate card.</p>
+      </div>
+      <div class="test-card">
+        <span class="test-label issue">Issue</span>
+        <p>The motivation-letter field felt like a dead end — nobody was sure if their edits were actually saved.</p>
+        <span class="test-label fix">Fix</span>
+        <p>Added an inline autosave confirmation and a visible character count under the field.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- POSTER -->
+  <section class="poster-section">
+    <div class="s-label">Poster</div>
+    <div class="poster-layout">
+      <div class="poster-frame">
+        <img src="iwave-poster-banner.jpg" alt="Iwave Poster — Ride the wave to your degree">
+      </div>
+      <div class="poster-info">
+        <h2 class="poster-headline">Ride the wave<br>to your degree.</h2>
+        <p class="poster-body">A bold, graphic poster designed to capture the spirit of Iwave — the energy of a graduating student, the optimism of opportunity, and the visual identity of the platform in a single frame.</p>
+        <p class="poster-body">The layered illustration combines flat geometric shapes with the Iwave logo mark and wordmark, set against a vibrant green-and-blue rhythm that references waves of movement and momentum.</p>
+        <div class="poster-meta-row">
+          <div class="poster-meta">
+            <div class="poster-meta-label">Tagline</div>
+            <div class="poster-meta-val">"Ride the wave to your degree"</div>
+          </div>
+          <div class="poster-meta">
+            <div class="poster-meta-label">Format</div>
+            <div class="poster-meta-val">Portrait · Digital &amp; Print</div>
+          </div>
+          <div class="poster-meta">
+            <div class="poster-meta-label">Style</div>
+            <div class="poster-meta-val">Flat illustration · Editorial</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section>
+    <div class="s-label">Campaign</div>
+    <h2 class="banner-heading">Out of home,<br><em>in the wild</em>.</h2>
+    <p class="banner-desc">The poster system extended into a real out-of-home placement — a bus-shelter light box pairing the bold typographic hit with portrait-format lifestyle and pattern posters, showing how the identity holds up in the real world at full size.</p>
+    <div class="banner-grid">
+      <img src="iwave-poster-1.png" alt="Iwave banner mockup hanging on a building facade between two stone columns, showing the green illustrated poster of a graduate throwing their cap with the Iwave wordmark and tagline Ride the wave to your degree">
+      <img src="iwave-poster-2.png" alt="Iwave poster mockup featuring four posters: a bold yellow Ride the wave to your degree typographic poster, an illustrated pattern poster with diverse faces, a black-and-white photo poster of graduates, and a green illustrated poster of a graduate throwing their cap">
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section>
+    <div class="s-label">Key Points</div>
+    <div class="kp-grid">
+      <div class="kp-item">
+        <div class="kp-num">01</div>
+        <div class="kp-title">All aids in one platform</div>
+        <div class="kp-body">Students find opportunities worldwide — scholarships, on-campus positions, donations, and student jobs — without switching between fragmented sources.</div>
+      </div>
+      <div class="kp-item">
+        <div class="kp-num">02</div>
+        <div class="kp-title">Organised by region &amp; portfolio</div>
+        <div class="kp-body">Opportunities are curated based on the user's region and academic profile — surfacing what's actually available and relevant to them.</div>
+      </div>
+      <div class="kp-item">
+        <div class="kp-num">03</div>
+        <div class="kp-title">Fast &amp; easy resume transfer</div>
+        <div class="kp-body">Direct connection with LinkedIn and other platforms means CVs, SOPs and portfolios are ready to submit instantly from one place.</div>
+      </div>
+      <div class="kp-item">
+        <div class="kp-num">04</div>
+        <div class="kp-title">Communication services</div>
+        <div class="kp-body">The fastest way to connect with experienced academics — opening doors to TA, RA and research assistant positions.</div>
+      </div>
+      <div class="kp-item">
+        <div class="kp-num">05</div>
+        <div class="kp-title">Supporters &amp; students together</div>
+        <div class="kp-body">Donors and sponsors have a dedicated interface to recognise student cases closely — making giving personal, targeted, and meaningful.</div>
+      </div>
+      <div class="kp-item">
+        <div class="kp-num">06</div>
+        <div class="kp-title">Connect with professors</div>
+        <div class="kp-body">Easy discovery of academic positions like Teaching Assistant or Research Assistant opportunities directly through the platform.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section>
+    <div class="s-label">App Architecture</div>
+    <div class="arch-inner">
+      <div>
+        <h2 class="arch-heading">Dual-role platform with distinct user journeys</h2>
+        <p class="arch-p">Iwave is built for two audiences: students seeking support and supporters looking to give. Both enter the same platform but follow tailored flows — from discovery and application through to payment and communication.</p>
+        <p class="arch-p">The architecture prioritises speed of access. From the home feed, a student reaches a scholarship listing, attaches their CV and SOP, and submits — in under three screens.</p>
+        <div class="arch-roles">
+          <div class="role-pill">Student flow — Apply, wave, connect</div>
+          <div class="role-pill">Supporter flow — Post, review, accept</div>
+          <div class="role-pill">Shared — Notifications, Q&amp;A, messaging</div>
+          <div class="role-pill">Payment process — Secure &amp; direct</div>
+        </div>
+      </div>
+      <div>
+        <svg viewBox="0 0 420 480" xmlns="http://www.w3.org/2000/svg" fill="none" style="width:100%;height:auto;">
+          <rect x="20" y="20" width="100" height="36" rx="3" stroke="rgba(44,81,218,0.8)" stroke-width="0.5" fill="#2c51da"/>
+          <text x="70" y="43" text-anchor="middle" font-family="Jost" font-size="11" fill="#ffffff" letter-spacing="0.08em" font-weight="700">STUDENT</text>
+          <rect x="20" y="80" width="100" height="32" rx="3" stroke="rgba(44,81,218,0.4)" stroke-width="0.5" fill="#2c51da"/>
+          <text x="70" y="100" text-anchor="middle" font-family="Jost" font-size="10" fill="#ffffff">Home / Wave</text>
+          <rect x="20" y="130" width="100" height="32" rx="3" stroke="rgba(44,81,218,0.4)" stroke-width="0.5" fill="#2c51da"/>
+          <text x="70" y="150" text-anchor="middle" font-family="Jost" font-size="10" fill="#ffffff">Apply</text>
+          <rect x="20" y="180" width="100" height="32" rx="3" stroke="rgba(44,81,218,0.4)" stroke-width="0.5" fill="#2c51da"/>
+          <text x="70" y="200" text-anchor="middle" font-family="Jost" font-size="10" fill="#ffffff">Scholarships</text>
+          <rect x="20" y="230" width="100" height="32" rx="3" stroke="rgba(44,81,218,0.4)" stroke-width="0.5" fill="#2c51da"/>
+          <text x="70" y="250" text-anchor="middle" font-family="Jost" font-size="10" fill="#ffffff">Notification</text>
+          <rect x="20" y="280" width="100" height="32" rx="3" stroke="rgba(44,81,218,0.4)" stroke-width="0.5" fill="#2c51da"/>
+          <text x="70" y="300" text-anchor="middle" font-family="Jost" font-size="10" fill="#ffffff">Profile</text>
+          <line x1="70" y1="56" x2="70" y2="80" stroke="rgba(44,81,218,0.5)" stroke-width="0.5"/>
+          <line x1="70" y1="112" x2="70" y2="130" stroke="rgba(44,81,218,0.5)" stroke-width="0.5"/>
+          <line x1="70" y1="162" x2="70" y2="180" stroke="rgba(44,81,218,0.5)" stroke-width="0.5"/>
+          <line x1="70" y1="212" x2="70" y2="230" stroke="rgba(44,81,218,0.5)" stroke-width="0.5"/>
+          <line x1="70" y1="262" x2="70" y2="280" stroke="rgba(44,81,218,0.5)" stroke-width="0.5"/>
+          <rect x="300" y="20" width="100" height="36" rx="3" stroke="rgba(44,81,218,0.8)" stroke-width="0.5" fill="#2c51da"/>
+          <text x="350" y="43" text-anchor="middle" font-family="Jost" font-size="11" fill="#ffffff" letter-spacing="0.08em" font-weight="700">SUPPORTER</text>
+          <rect x="300" y="80" width="100" height="32" rx="3" stroke="rgba(44,81,218,0.4)" stroke-width="0.5" fill="#2c51da"/>
+          <text x="350" y="100" text-anchor="middle" font-family="Jost" font-size="10" fill="#ffffff">Home / Wave</text>
+          <rect x="300" y="130" width="100" height="32" rx="3" stroke="rgba(44,81,218,0.4)" stroke-width="0.5" fill="#2c51da"/>
+          <text x="350" y="150" text-anchor="middle" font-family="Jost" font-size="10" fill="#ffffff">Student CV</text>
+          <rect x="300" y="180" width="100" height="32" rx="3" stroke="rgba(44,81,218,0.4)" stroke-width="0.5" fill="#2c51da"/>
+          <text x="350" y="200" text-anchor="middle" font-family="Jost" font-size="10" fill="#ffffff">Accept / Decline</text>
+          <rect x="300" y="230" width="100" height="32" rx="3" stroke="rgba(44,81,218,0.4)" stroke-width="0.5" fill="#2c51da"/>
+          <text x="350" y="250" text-anchor="middle" font-family="Jost" font-size="10" fill="#ffffff">Notification</text>
+          <rect x="300" y="280" width="100" height="32" rx="3" stroke="rgba(44,81,218,0.4)" stroke-width="0.5" fill="#2c51da"/>
+          <text x="350" y="300" text-anchor="middle" font-family="Jost" font-size="10" fill="#ffffff">Your aids</text>
+          <line x1="350" y1="56" x2="350" y2="80" stroke="rgba(44,81,218,0.5)" stroke-width="0.5"/>
+          <line x1="350" y1="112" x2="350" y2="130" stroke="rgba(44,81,218,0.5)" stroke-width="0.5"/>
+          <line x1="350" y1="162" x2="350" y2="180" stroke="rgba(44,81,218,0.5)" stroke-width="0.5"/>
+          <line x1="350" y1="212" x2="350" y2="230" stroke="rgba(44,81,218,0.5)" stroke-width="0.5"/>
+          <line x1="350" y1="262" x2="350" y2="280" stroke="rgba(44,81,218,0.5)" stroke-width="0.5"/>
+          <rect x="160" y="350" width="100" height="36" rx="3" stroke="rgba(44,81,218,0.8)" stroke-width="0.5" fill="#2c51da"/>
+          <text x="210" y="373" text-anchor="middle" font-family="Jost" font-size="10" fill="#ffffff" letter-spacing="0.08em" font-weight="700">PAYMENT</text>
+          <line x1="120" y1="296" x2="210" y2="350" stroke="rgba(44,81,218,0.4)" stroke-width="0.5"/>
+          <line x1="300" y1="296" x2="210" y2="350" stroke="rgba(44,81,218,0.4)" stroke-width="0.5"/>
+          <rect x="160" y="420" width="100" height="32" rx="3" stroke="rgba(44,81,218,0.4)" stroke-width="0.5" fill="#2c51da"/>
+          <text x="210" y="440" text-anchor="middle" font-family="Jost" font-size="10" fill="#ffffff">Open / Log in</text>
+          <line x1="210" y1="420" x2="210" y2="386" stroke="rgba(44,81,218,0.5)" stroke-width="0.5"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section>
+    <div class="s-label">Design System</div>
+    <div class="design-grid">
+      <div>
+        <div class="design-label">Typeface</div>
+        <div class="type-glyph-box">
+          <div class="type-glyph">Aa</div>
+          <div class="type-glyph-name">Basote</div>
+          <div class="type-glyph-tag">Primary Typeface — Display &amp; Body</div>
+        </div>
+        <div class="type-scale">
+          <div class="type-scale-row display">
+            <span class="tsr-label">Display</span>
+            <span class="tsr-sample">Ride the wave</span>
+          </div>
+          <div class="type-scale-row heading">
+            <span class="tsr-label">Heading</span>
+            <span class="tsr-sample">Anyone who wants higher education</span>
+          </div>
+          <div class="type-scale-row body">
+            <span class="tsr-label">Body</span>
+            <span class="tsr-sample">Aa Bb Cc — 0123456789</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="design-label">Color Palette</div>
+        <div class="palette-row">
+          <div class="palette-swatch">
+            <div class="palette-swatch-color" style="background:#00922a"></div>
+            <div class="palette-swatch-hex">#00922A</div>
+          </div>
+          <div class="palette-swatch">
+            <div class="palette-swatch-color" style="background:#f7931e"></div>
+            <div class="palette-swatch-hex">#F7931E</div>
+          </div>
+          <div class="palette-swatch">
+            <div class="palette-swatch-color" style="background:#2c51da"></div>
+            <div class="palette-swatch-hex">#2C51DA</div>
+          </div>
+          <div class="palette-swatch">
+            <div class="palette-swatch-color" style="background:#ee0000"></div>
+            <div class="palette-swatch-hex">#EE0000</div>
+          </div>
+          <div class="palette-swatch">
+            <div class="palette-swatch-color" style="background:#29abe2"></div>
+            <div class="palette-swatch-hex">#29ABE2</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="next-section">
+    <a href="index.html#projects" class="next-back-iw">
+      <span>← Back to Work</span>
+    </a>
+    <a href="palem.html" class="next-proj-iw">
+      <div class="next-lbl-iw">Next Project</div>
+      <div class="next-ttl-iw">Palem</div>
+      <div class="next-arr-iw">→</div>
+    </a>
+  </div>
+
+  <footer>
+    <span class="footer-name">Hengameh Koliyaei — Portfolio</span>
+    <span class="footer-note">Iwave · Mobile Application Design</span>
+  </footer>
+
+</div>
+
+
+</body>
+</html>
